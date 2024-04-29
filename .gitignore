@@ -1,0 +1,52 @@
+data
+data1
+data-v*
+miniodata
+.minio.sys
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+.env
+.idea
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+out/
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+__debug_bin
+
+main
+tmp/
+
+# plugins
+/plugins
+
+# binary in root
+/zincsearch
+
+#gateway binary
+/gateway/wzinc
+/gateway/callback
+/gateway/cmd/
+
+*.doc
+*.docx
+*.pdf
+data/
+
+docker-compose.yml
+.vscode/
+.VSCodeCounter/
+
+search/
+test/
+
+.DS_Store

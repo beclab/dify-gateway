@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+#  db:
+#    image: mongo
+#    restart: always
+#    ports:
+#      - "27017:27017"
+#    environment:
+#      - MONGO_INITDB_ROOT_USERNAME=admin
+#      - MONGO_INITDB_ROOT_PASSWORD=123456
+
+  zincsearch:
+    image: public.ecr.aws/zinclabs/zinc:latest
+#    depends_on:
+#      - db
+    restart: always
+    ports:
+      - 4080:4080
+    user: root
+    environment:
+      - ZINC_DATA_PATH="/data"
+      - ZINC_FIRST_ADMIN_USER=admin
+      - ZINC_FIRST_ADMIN_PASSWORD=User#123
+    #挂载容器外目录为zinc的数据目录（可选）
+    # volumes:
+    #   - /data/zincsearch/data:/data
+
+#  searcher:
+#    image: calehh/file_search:latest
+#    depends_on:
+#      - db
+#      - zincsearch
+#    ports:
+#      - "6317:6317"
+#    environment:
+#      - WATCH_DIR=/data/filesdir #需要监控和检索的数据文件路径，应与volumns挂载路径相同。
+#      - MONGO_URI=mongodb://admin:123456@db:27017
+#      - ZINC_FIRST_ADMIN_USER=admin
+#      - ZINC_FIRST_ADMIN_PASSWORD=User#123
+#      - ZINC_URI=http://zincsearch:4080
+#      - CHAT_MODEL_URI=http://localhost/ai/chat #AI世界知识模型URI
+#      - FILE_MODEL_URI=http://localhost/ai/file #AI文档理解模型URI
+#      - POD_NAME=your_pod
+#      - NAMESPACE=your_namespace
+#      - CONTAINER_NAME=your_container_in_pod
+#      - NOTIFY_SERVER=fsnotify_proxy_addr
+#    volumes:
+#      #需要挂载待监控的数据文件目录到容器的相同目录，以保证搜索返回的路径正确。注意避免和ubuntu已有目录冲突。
+#      - /data/filesdir:/data/filesdir:ro
