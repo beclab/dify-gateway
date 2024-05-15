@@ -455,6 +455,31 @@ func CreateAgent(agentName string) {
 	AshiaAgentId = IsAgentExist(agentName)
 }
 
+type Response struct {
+	RunningType string `json:"runningType"`
+}
+
+func getRunningType(url string) (string, error) {
+	resp, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	var response Response
+	err = json.Unmarshal(body, &response)
+	if err != nil {
+		return "", err
+	}
+
+	return response.RunningType, nil
+}
+
 func GetAppIdsByAgentNameAndModelName(agentName string, modelName string, auth bool) []string {
 	_, respBody, _, _ := JSONWithResp(DifyHost+"/console/api/apps?page=1&limit=100&name="+agentName,
 		"GET",
@@ -597,7 +622,7 @@ func MakeSetAgentDefaultModelBody() []byte {
 	return body
 }
 
-func MakeSetAgentModelBody() []byte {
+func MakeSetAgentModelBody(provider, modelName string) []byte {
 	config := Config{
 		//PrePrompt:                     "",
 		//PromptType:                    "simple",
@@ -621,15 +646,15 @@ func MakeSetAgentModelBody() []byte {
 		//	Prompt:       nil,
 		//},
 		Model: ModelConfig{
-			Provider: "openai_api_compatible",
-			Name:     "nitro",
+			Provider: provider, // "openai_api_compatible",
+			Name:     modelName,
 			Mode:     "agent-chat",
 			CompletionParams: CompletionParamsConfig{
 				Temperature:      0.7,
 				TopP:             1,
 				FrequencyPenalty: 0,
 				PresencePenalty:  0,
-				MaxTokens:        512,
+				MaxTokens:        1024,
 			},
 		},
 		//DatasetConfigs: DatasetConfigs{
@@ -679,10 +704,25 @@ func SetAgentModel(appId string, body []byte) (int, []byte, error) {
 }
 
 func SetAshiaModel() error {
-	appIds := GetAppIdsByAgentNameAndModelName("Ashia", "nitro", true)
+	runningType, err := getRunningType(DifyHost + "/nitro/running_type")
+	if err != nil {
+		fmt.Println("llm model running type get failed!")
+		return err
+	}
+	fmt.Println("llm model running by: ", runningType)
+	var modelName = "gpt-4"
+	var provider = "openai"
+	if runningType == "Nitro" {
+		provider = "openai_api_compatible"
+		modelName = "nitro"
+	} else if runningType == "WASM" {
+		provider = "openai_api_compatible"
+		modelName = "wasm"
+	}
+	appIds := GetAppIdsByAgentNameAndModelName("Ashia", modelName, true)
 	fmt.Println("Ashia Agent IDs: ", appIds)
 	if len(appIds) > 0 {
-		body := MakeSetAgentModelBody()
+		body := MakeSetAgentModelBody(provider, modelName)
 		//defaultBody := MakeSetAgentDefaultModelBody()
 		for _, appId := range appIds {
 			fmt.Println("Set Ashia ID: ", appId)
