@@ -654,7 +654,7 @@ func MakeSetAgentModelBody(provider, modelName string) []byte {
 				TopP:             1,
 				FrequencyPenalty: 0,
 				PresencePenalty:  0,
-				MaxTokens:        1024,
+				MaxTokens:        512,
 			},
 		},
 		//DatasetConfigs: DatasetConfigs{
