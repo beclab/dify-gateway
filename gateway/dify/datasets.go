@@ -312,19 +312,20 @@ func DatasetsAddDocument(fileName string, targetDatasetID string) error {
 		if len(fileIds) == 0 {
 			content := ""
 			fileType := parser.GetTypeFromName(fileName)
-			if fileType != ".txt" && fileType != ".md" && fileType != ".markdown" && fileType != ".html" && fileType != ".htm" && fileType != ".pdf" && fileType != ".xlsx" {
-				f, err := os.Open(fileName)
-				if err != nil {
-					return err
-				}
-				data, _ := ioutil.ReadAll(f)
-				f.Close()
-				r := bytes.NewReader(data)
-				content, err = parser.ParseDoc(r, fileName)
-				if err != nil {
-					return err
-				}
-				fmt.Println(content)
+			if fileType != ".txt" && fileType != ".md" && fileType != ".markdown" && fileType != ".html" && fileType != ".htm" && fileType != ".pdf" && fileType != ".xls" && fileType != ".xlsx" && fileType != ".csv" {
+				return nil
+				//f, err := os.Open(fileName)
+				//if err != nil {
+				//	return err
+				//}
+				//data, _ := ioutil.ReadAll(f)
+				//f.Close()
+				//r := bytes.NewReader(data)
+				//content, err = parser.ParseDoc(r, fileName)
+				//if err != nil {
+				//	return err
+				//}
+				//fmt.Println(content)
 			}
 			uploadFileId := UploadFile(fileName, content)
 			if uploadFileId != "" {

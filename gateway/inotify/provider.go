@@ -22,7 +22,7 @@ type RequestProvider struct {
 }
 
 type RequestProviderData struct {
-	OpType int                    `json:"op_type"` // 1: GetApps; 2: PostApps; 3: GetIndexingStatus; 4: UpdateCallback; 5: Set MyNitro to all Ashia
+	OpType int                    `json:"op_type"` // 1: GetDatasets; 2: PostDatasets; 3: GetIndexingStatus; 4: UpdateCallback; 5: DeleteDatasets
 	OpData map[string]interface{} `json:"op_data"`
 }
 
@@ -107,6 +107,25 @@ func DifyGatewayBaseProviderHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		req = nil
+	case 5:
+		datasetID := opData["datasetID"].(string)
+
+		fmt.Println("OpType: Delete Dataset")
+		fmt.Println("Dataset ID:", datasetID)
+
+		//opDataBytes, err := json.Marshal(opData)
+		//if err != nil {
+		//	http.Error(w, "Failed to marshal opData", http.StatusInternalServerError)
+		//	return
+		//}
+
+		url := "http://127.0.0.1:6317" + NginxPrefix + dify.ConsoleApiPrefix + "/datasets/" + datasetID
+		req, err = http.NewRequest("DELETE", url, nil) // bytes.NewBuffer(opDataBytes))
+		if err != nil {
+			http.Error(w, "Failed to delete dataset", http.StatusInternalServerError)
+			return
+		}
+		fmt.Println(req.URL.String())
 	default:
 		http.Error(w, "Invalid opType", http.StatusBadRequest)
 		return
