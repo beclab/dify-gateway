@@ -312,7 +312,7 @@ func DatasetsAddDocument(fileName string, targetDatasetID string) error {
 		if len(fileIds) == 0 {
 			content := ""
 			fileType := parser.GetTypeFromName(fileName)
-			if fileType != ".txt" && fileType != ".md" && fileType != ".markdown" && fileType != ".html" && fileType != ".htm" && fileType != ".pdf" && fileType != ".xls" && fileType != ".xlsx" && fileType != ".csv" {
+			if fileType != ".txt" && fileType != ".md" && fileType != ".markdown" && fileType != ".html" && fileType != ".htm" && fileType != ".docx" && fileType != ".doc" && fileType != ".pdf" && fileType != ".xls" && fileType != ".xlsx" && fileType != ".csv" {
 				return nil
 				//f, err := os.Open(fileName)
 				//if err != nil {
