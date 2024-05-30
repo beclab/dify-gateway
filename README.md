@@ -22,11 +22,11 @@ About **Dify**: https://github.com/beclab/dify
 
 ### Clone the repository
 ```shell
-git clone --recursive https://github.com/beclab/search2.git
+git clone --recursive https://github.com/beclab/dify-gateway.git
 ```
 ### Build
 ```shell
-cd search2/gateway
+cd dify-gateway/gateway
 go mod tidy
 go build -o wzinc
 ```
