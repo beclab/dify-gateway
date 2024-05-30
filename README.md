@@ -1,24 +1,24 @@
-# __**Search2 Gateway**__
+# __**Dify Gateway**__
 ## Description
-**Search2 Gateway** acts as a bridge, establishing a connection between **dify** and other services such as **files** and **agent**.
+**Dify Gateway** acts as a bridge, establishing a connection between **Dify** and other services such as **Files** and **Agent**.
 
-**Search2 Gateway** encompasses two main sets of functionalities:
+**Dify Gateway** encompasses two main sets of functionalities:
 1. **Watcher**
 
-Depending on the configuration, it monitors specific folders in the **files** service for each identified dataset in **dify**.
+Depending on the configuration, it monitors specific folders in the **files** service for each identified dataset in **Dify**.
 
 When changes occur in a folder, the modified contents are sent to the corresponding datasets for future utilization by the **agent** service.
 
 2. **Gateway**
 
-This package comprises **dify** APIs that form the core for fulfilling our requirements.
+This package comprises **Dify** APIs that form the core for fulfilling our requirements.
 
-Additionally, it offers management of user-agent relationships, a feature that is not present in the original **dify**.
+Additionally, it offers management of user-agent relationships, a feature that is not present in the original **Dify**.
 
 ## Getting Started
-You can run **Search2 Gateway** locally, but it will only function correctly when integrated with **dify**.
+You can run **Dify Gateway** locally, but it will only function correctly when integrated with **Dify**.
 
-About **dify**: https://github.com/beclab/dify
+About **Dify**: https://github.com/beclab/dify
 
 ### Clone the repository
 ```shell
