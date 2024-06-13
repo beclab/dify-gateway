@@ -519,24 +519,24 @@ func GetAppIdsByAgentNameAndModelName(agentName string, modelName string, auth b
 }
 
 type Config struct {
-	//PrePrompt                     string                       `json:"pre_prompt"`
-	//PromptType                    string                       `json:"prompt_type"`
-	//ChatPromptConfig              map[string]string            `json:"chat_prompt_config"`
-	//CompletionPromptConfig        map[string]string            `json:"completion_prompt_config"`
-	//UserInputForm                 []string                     `json:"user_input_form"`
-	//DatasetQueryVariable          string                       `json:"dataset_query_variable"`
-	//OpeningStatement              string                       `json:"opening_statement"`
-	//SuggestedQuestions            []string                     `json:"suggested_questions"`
-	//MoreLikeThis                  MoreLikeThisConfig           `json:"more_like_this"`
-	//SuggestedQuestionsAfterAnswer SuggestedQuestions           `json:"suggested_questions_after_answer"`
-	//SpeechToText                  SpeechToTextConfig           `json:"speech_to_text"`
-	//TextToSpeech                  TextToSpeechConfig           `json:"text_to_speech"`
-	//RetrieverResource             RetrieverResource            `json:"retriever_resource"`
-	//SensitiveWordAvoidance        SensitiveWordAvoidanceConfig `json:"sensitive_word_avoidance"`
-	//AgentMode                     AgentModeConfig              `json:"agent_mode"`
-	Model ModelConfig `json:"model"`
-	//DatasetConfigs                DatasetConfigs               `json:"dataset_configs"`
-	//FileUpload                    FileUploadConfig             `json:"file_upload"`
+	PrePrompt                     string                       `json:"pre_prompt"`
+	PromptType                    string                       `json:"prompt_type"`
+	ChatPromptConfig              map[string]string            `json:"chat_prompt_config"`
+	CompletionPromptConfig        map[string]string            `json:"completion_prompt_config"`
+	UserInputForm                 []string                     `json:"user_input_form"`
+	DatasetQueryVariable          string                       `json:"dataset_query_variable"`
+	OpeningStatement              string                       `json:"opening_statement"`
+	SuggestedQuestions            []string                     `json:"suggested_questions"`
+	MoreLikeThis                  MoreLikeThisConfig           `json:"more_like_this"`
+	SuggestedQuestionsAfterAnswer SuggestedQuestions           `json:"suggested_questions_after_answer"`
+	SpeechToText                  SpeechToTextConfig           `json:"speech_to_text"`
+	TextToSpeech                  TextToSpeechConfig           `json:"text_to_speech"`
+	RetrieverResource             RetrieverResource            `json:"retriever_resource"`
+	SensitiveWordAvoidance        SensitiveWordAvoidanceConfig `json:"sensitive_word_avoidance"`
+	AgentMode                     AgentModeConfig              `json:"agent_mode"`
+	Model                         ModelConfig                  `json:"model"`
+	DatasetConfigs                DatasetConfigs               `json:"dataset_configs"`
+	FileUpload                    FileUploadConfig             `json:"file_upload"`
 }
 
 type MoreLikeThisConfig struct {
@@ -624,27 +624,27 @@ func MakeSetAgentDefaultModelBody() []byte {
 
 func MakeSetAgentModelBody(provider, modelName string) []byte {
 	config := Config{
-		//PrePrompt:                     "",
-		//PromptType:                    "simple",
-		//ChatPromptConfig:              make(map[string]string),
-		//CompletionPromptConfig:        make(map[string]string),
-		//UserInputForm:                 []string{},
-		//DatasetQueryVariable:          "",
-		//OpeningStatement:              "",
-		//SuggestedQuestions:            []string{},
-		//MoreLikeThis:                  MoreLikeThisConfig{Enabled: false},
-		//SuggestedQuestionsAfterAnswer: SuggestedQuestions{Enabled: false},
-		//SpeechToText:                  SpeechToTextConfig{Enabled: false},
-		//TextToSpeech:                  TextToSpeechConfig{Enabled: false},
-		//RetrieverResource:             RetrieverResource{Enabled: false},
-		//SensitiveWordAvoidance:        SensitiveWordAvoidanceConfig{Enabled: false, Type: "", Configs: []string{}},
-		//AgentMode: AgentModeConfig{
-		//	MaxIteration: 5,
-		//	Enabled:      true,
-		//	Strategy:     "react",
-		//	Tools:        []string{},
-		//	Prompt:       nil,
-		//},
+		PrePrompt:                     "",
+		PromptType:                    "simple",
+		ChatPromptConfig:              make(map[string]string),
+		CompletionPromptConfig:        make(map[string]string),
+		UserInputForm:                 []string{},
+		DatasetQueryVariable:          "",
+		OpeningStatement:              "",
+		SuggestedQuestions:            []string{},
+		MoreLikeThis:                  MoreLikeThisConfig{Enabled: false},
+		SuggestedQuestionsAfterAnswer: SuggestedQuestions{Enabled: false},
+		SpeechToText:                  SpeechToTextConfig{Enabled: false},
+		TextToSpeech:                  TextToSpeechConfig{Enabled: false},
+		RetrieverResource:             RetrieverResource{Enabled: false},
+		SensitiveWordAvoidance:        SensitiveWordAvoidanceConfig{Enabled: false, Type: "", Configs: []string{}},
+		AgentMode: AgentModeConfig{
+			MaxIteration: 5,
+			Enabled:      true,
+			Strategy:     "react",
+			Tools:        []string{},
+			Prompt:       nil,
+		},
 		Model: ModelConfig{
 			Provider: provider, // "openai_api_compatible",
 			Name:     modelName,
@@ -657,27 +657,27 @@ func MakeSetAgentModelBody(provider, modelName string) []byte {
 				MaxTokens:        512,
 			},
 		},
-		//DatasetConfigs: DatasetConfigs{
-		//	RetrievalModel: "single",
-		//	Datasets: struct {
-		//		Datasets []string `json:"datasets"`
-		//	}{
-		//		Datasets: []string{},
-		//	},
-		//},
-		//FileUpload: FileUploadConfig{
-		//	Image: struct {
-		//		Enabled         bool     `json:"enabled"`
-		//		NumberLimits    int      `json:"number_limits"`
-		//		Detail          string   `json:"detail"`
-		//		TransferMethods []string `json:"transfer_methods"`
-		//	}{
-		//		Enabled:         false,
-		//		NumberLimits:    3,
-		//		Detail:          "high",
-		//		TransferMethods: []string{"remote_url", "local_file"},
-		//	},
-		//},
+		DatasetConfigs: DatasetConfigs{
+			RetrievalModel: "single",
+			Datasets: struct {
+				Datasets []string `json:"datasets"`
+			}{
+				Datasets: []string{},
+			},
+		},
+		FileUpload: FileUploadConfig{
+			Image: struct {
+				Enabled         bool     `json:"enabled"`
+				NumberLimits    int      `json:"number_limits"`
+				Detail          string   `json:"detail"`
+				TransferMethods []string `json:"transfer_methods"`
+			}{
+				Enabled:         false,
+				NumberLimits:    3,
+				Detail:          "high",
+				TransferMethods: []string{"remote_url", "local_file"},
+			},
+		},
 	}
 
 	body, err := json.MarshalIndent(config, "", "    ")
