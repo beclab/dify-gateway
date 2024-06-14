@@ -439,7 +439,7 @@ func CreateAgent(agentName string) {
 		"name":            agentName,
 		"icon":            "",
 		"icon_background": "#FFEAD5",
-		"mode":            "agent-chat",
+		"mode":            "chat",
 		"description":     "",
 	}
 	jsonPayload, err := json.Marshal(payload)
@@ -648,7 +648,7 @@ func MakeSetAgentModelBody(provider, modelName string) []byte {
 		Model: ModelConfig{
 			Provider: provider, // "openai_api_compatible",
 			Name:     modelName,
-			Mode:     "agent-chat",
+			Mode:     "chat",
 			CompletionParams: CompletionParamsConfig{
 				Temperature:      0.7,
 				TopP:             1,
