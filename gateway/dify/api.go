@@ -25,6 +25,7 @@ var AshiaAgentId string = ""
 var CurrentAccountId = ""
 var CurrentAccountEmail = ""
 var DifyHost = os.Getenv("DIFY_HOST")
+var LLMHost = os.Getenv("LLM_HOST")
 var ConsoleApiPrefix = "/console/api"
 var ServiceApiPrefix = "/v1"
 var WholeConsoleApiPrefix = DifyHost + ConsoleApiPrefix
@@ -704,7 +705,7 @@ func SetAgentModel(appId string, body []byte) (int, []byte, error) {
 }
 
 func SetAshiaModel() error {
-	runningType, err := getRunningType(DifyHost + "/nitro/running_type")
+	runningType, err := getRunningType(LLMHost + "/nitro/running_type")
 	if err != nil {
 		fmt.Println("llm model running type get failed!")
 		return err
