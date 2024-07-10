@@ -8,7 +8,6 @@ import (
 	"wzinc/api/datasets"
 	"wzinc/api/service_api_app"
 	"wzinc/api/service_api_dataset"
-	"wzinc/inotify"
 )
 
 var NginxPrefix = os.Getenv("PREFIX")
@@ -26,8 +25,8 @@ func NewRouter() *mux.Router {
 	router.HandleFunc("/callback/delete", api.CallbackDeleteHandler)
 
 	// provider
-	router.HandleFunc(NginxPrefix+"/dify_gateway_base_provider", inotify.DifyGatewayBaseProviderHandler)
-	router.HandleFunc(NginxPrefix+"/update_dataset_folder_paths", inotify.UpdateDatasetFolderPathsHandler) // unused for now
+	//router.HandleFunc(NginxPrefix+"/dify_gateway_base_provider", inotify.DifyGatewayBaseProviderHandler)
+	//router.HandleFunc(NginxPrefix+"/update_dataset_folder_paths", inotify.UpdateDatasetFolderPathsHandler) // unused for now
 
 	// service api
 	// app
