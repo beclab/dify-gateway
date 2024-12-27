@@ -46,7 +46,7 @@ func CallbackCreateHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// 调用 ListApp 函数获取数据，传递 limit 和 page 参数
-	data := dify.CallbackCreate(name)
+	data := dify.CallbackCreateV14(name)
 
 	// 将数据转换为 JSON 格式
 	response, err := json.Marshal(data)

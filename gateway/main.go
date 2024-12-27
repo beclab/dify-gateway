@@ -63,15 +63,12 @@ func Start(ctx *cli.Context) {
 	//inotify.WatchPath(inotify.WatchDir)
 	//inotify.ListApp()
 
-	// 初始化 PathToDatasetMap
 	inotify.InitializePathToDatasetMap(inotify.WatchDir, dify.DatasetId)
 
 	inotify.WatchPath(inotify.PathToDatasetMap)
 
-	// 创建 HTTP 服务器
 	HTTPServer = http_server.NewServer()
 
-	// 启动服务器
 	err := HTTPServer.Start(":6317")
 	if err != nil {
 		log.Fatal(err)
@@ -80,8 +77,7 @@ func Start(ctx *cli.Context) {
 }
 
 func main() {
-	// 启动定时执行逻辑的goroutine
-	go dify.StartScheduledExecution()
+	//go dify.StartScheduledExecution()
 
 	if err := app.Run(os.Args); err != nil {
 		fmt.Fprintln(os.Stderr, err)

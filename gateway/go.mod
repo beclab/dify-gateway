@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	bytetrade.io/web3os/fs-lib v0.0.0-00010101000000-000000000000
-	github.com/fsnotify/fsnotify v1.6.0
 	github.com/gorilla/mux v1.8.1
 	gopkg.in/urfave/cli.v1 v1.20.0
 	gorm.io/driver/postgres v1.5.4
@@ -19,6 +18,7 @@ require (
 	github.com/andybalholm/cascadia v1.2.0 // indirect
 	github.com/araddon/dateparse v0.0.0-20200409225146-d820a6159ab1 // indirect
 	github.com/fatih/set v0.2.1 // indirect
+	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gigawattio/window v0.0.0-20180317192513-0f5467e35573 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-resty/resty/v2 v2.3.0 // indirect
@@ -53,4 +53,4 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 )
 
-replace bytetrade.io/web3os/fs-lib => github.com/beclab/fs-lib v0.0.1
+replace bytetrade.io/web3os/fs-lib => github.com/beclab/fs-lib v0.0.2

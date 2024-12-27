@@ -242,7 +242,10 @@ func GetDifyHeaders() {
 
 	type LoginData struct {
 		Result string `json:"result"`
-		Data   string `json:"data"`
+		Data   struct {
+			AccessToken  string `json:"access_token"`
+			RefreshToken string `json:"refresh_token"`
+		} `json:"data"`
 	}
 	var loginData LoginData
 	err := json.Unmarshal([]byte(respBody), &loginData)
@@ -256,7 +259,7 @@ func GetDifyHeaders() {
 		DifyHeaders = map[string]string{
 			//"Cookie":        "remember_token=" + remember_token + "; session=" + session,
 			//"Cookie":        "session=" + session,
-			"Authorization": "Bearer " + loginData.Data,
+			"Authorization": "Bearer " + loginData.Data.AccessToken,
 		}
 		fmt.Println(DifyHeaders)
 	} else {
@@ -271,8 +274,8 @@ func GetDifyHeadersV2(bflName string) {
 	DifySetup()
 
 	// 在配置里配置成空间用户名，如果用户已经建立，则什么事也不做，否则，会建立并激活用户（防止自动建立用户延迟）
-	CallbackCreate("test")
-	CallbackCreate(bflName)
+	CallbackCreateV14("test")
+	CallbackCreateV14(bflName)
 
 	var body struct {
 		Email      string `json:"email"`
@@ -298,7 +301,10 @@ func GetDifyHeadersV2(bflName string) {
 
 	type LoginData struct {
 		Result string `json:"result"`
-		Data   string `json:"data"`
+		Data   struct {
+			AccessToken  string `json:"access_token"`
+			RefreshToken string `json:"refresh_token"`
+		} `json:"data"`
 	}
 	var loginData LoginData
 	err := json.Unmarshal([]byte(respBody), &loginData)
@@ -313,7 +319,7 @@ func GetDifyHeadersV2(bflName string) {
 		DifyHeaders = map[string]string{
 			//"Cookie":        "remember_token=" + remember_token + "; session=" + session,
 			//"Cookie":        "session=" + session,
-			"Authorization": "Bearer " + loginData.Data,
+			"Authorization": "Bearer " + loginData.Data.AccessToken,
 		}
 	} else {
 		fmt.Println(statusCode, respHeader, string(respBody))
@@ -805,12 +811,12 @@ func InitDifyV2() {
 		CreateDocumentV2(bflName)
 	}
 	fmt.Println("Dataset got successfully! Dataset ID: ", DatasetId)
-	AshiaAgentId = IsAgentExist("Ashia")
-	if AshiaAgentId == "" {
-		fmt.Println("Ashia agent not found, create a new one.")
-		CreateAgent("Ashia")
-	}
-	fmt.Println("Ashia agent got successfully! Ashia agent ID: ", AshiaAgentId)
+	//AshiaAgentId = IsAgentExist("Ashia")
+	//if AshiaAgentId == "" {
+	//	fmt.Println("Ashia agent not found, create a new one.")
+	//	CreateAgent("Ashia")
+	//}
+	//fmt.Println("Ashia agent got successfully! Ashia agent ID: ", AshiaAgentId)
 }
 
 func IsAppYours(appId string) bool {
